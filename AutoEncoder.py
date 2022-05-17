@@ -75,3 +75,17 @@ def init_weights(m):
         m.bias.data.fill_(0.01)
 
 model.apply(init_weights)
+
+loss_fn = torch.nn.CrossEntropyLoss()
+
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
+
+# Number of samples per batch
+# Must divide number of samples exactly
+batch_size=25
+
+# Number of complete passes through all data
+n_epochs=15000
+
+# Create a random number generator to make permutations
+#rng=np.random.default_rng()
