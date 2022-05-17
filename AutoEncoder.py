@@ -76,7 +76,7 @@ def init_weights(m):
 
 model.apply(init_weights)
 
-loss_fn = torch.nn.CrossEntropyLoss()
+loss_fn = torch.nn.MSELoss()
 
 optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
