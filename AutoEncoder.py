@@ -68,3 +68,10 @@ model = torch.nn.Sequential(
     torch.nn.Sigmoid(),
     torch.nn.Linear(N_hidden,nd)
 )
+
+def init_weights(m):
+    if isinstance(m, torch.nn.Linear):
+        m.weight.data.uniform_(-1,1)
+        m.bias.data.fill_(0.01)
+
+model.apply(init_weights)
