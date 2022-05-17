@@ -37,3 +37,11 @@ plt.plot(X4[:,0],X4[:,2],"g+")
 plt.plot(X4[:,0],X4[:,3],"y+")
 plt.plot(X4[:,0],X4[:,4],"b+")
 plt.show()
+
+# Generate random projection
+P=np.random.random([6,5])
+
+X6=X4@P.T
+
+print("Shape: ",X6.shape)
+
