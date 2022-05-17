@@ -122,3 +122,18 @@ for ep in range(n_epochs):
  
 end_time=time.perf_counter()
 print("Total time spent optimizing: {:0.1f}sec.".format(end_time-start_time))
+
+# Apply model to whole set
+y_pred=model(Xt)
+Y=y_pred.detach().numpy()
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.plot(X6[:,0],X6[:,1],X6[:,2],color='green')
+ax.plot(Y[:,0],Y[:,1],Y[:,2],color='red')
+plt.show()
+
+# To encode, use first modules in model:
+y=model[0:3](Xt)
+
+# To decode use the rest:
+x_new=model[3:](y)
