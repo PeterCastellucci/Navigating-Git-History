@@ -45,3 +45,26 @@ X6=X4@P.T
 
 print("Shape: ",X6.shape)
 
+Xt=torch.tensor(X6,dtype=torch.float32)
+
+# Number of samples
+n_samples=100
+
+# Number of dimensions
+nd=6
+
+N_hidden=20  # Number of dimensions of hidden layer
+n_latent = 1
+# Use the nn package to define a model as a sequence of layers. 
+# nn.Sequential is a Module which contains other Modules, 
+# and applies them in sequence to produce its output. 
+# Each Linear Module computes output from input using a
+# linear function, and holds internal Tensors for its weight and bias.
+model = torch.nn.Sequential(
+    torch.nn.Linear(nd, N_hidden),
+    torch.nn.Sigmoid(),
+    torch.nn.Linear(N_hidden, n_latent),
+    torch.nn.Linear(n_latent, N_hidden),
+    torch.nn.Sigmoid(),
+    torch.nn.Linear(N_hidden,nd)
+)
