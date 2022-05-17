@@ -89,3 +89,36 @@ n_epochs=15000
 
 # Create a random number generator to make permutations
 #rng=np.random.default_rng()
+
+start_time=time.perf_counter()
+
+for ep in range(n_epochs):
+    # Randomly permute the data so it is presented
+    # in a different order in each epoch
+    perm=np.random.permutation(n_samples)
+    
+    # Total loss is sum over all batches
+    total_loss=0
+    
+    for b in range(round(n_samples/batch_size)):
+        # Pick out the b-th chunk of the data
+        batch_perm=perm[b*batch_size:(b+1)*batch_size]
+        y_pred = model(Xt[batch_perm])
+    
+        loss = loss_fn(y_pred, Xt[batch_perm])
+        total_loss+=loss.item()
+   
+        # Zero the gradients before running the backward pass.
+        model.zero_grad()
+    
+        # Compute gradients. 
+        loss.backward()
+    
+        # Use the optimizer to update the weights
+        optimizer.step()
+            
+    if ((ep+1)%100==0):  # Print every 100th epoch
+        print(ep+1, total_loss)
+ 
+end_time=time.perf_counter()
+print("Total time spent optimizing: {:0.1f}sec.".format(end_time-start_time))
