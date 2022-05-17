@@ -30,3 +30,10 @@ def make_manifold_samples(n_samples):
     if (student_id%3==0):
         X[:,4]=X[:,0]**2
     return X
+
+X4=make_manifold_samples(n_samples)
+plt.plot(X4[:,0],X4[:,1],"r+")
+plt.plot(X4[:,0],X4[:,2],"g+")
+plt.plot(X4[:,0],X4[:,3],"y+")
+plt.plot(X4[:,0],X4[:,4],"b+")
+plt.show()
